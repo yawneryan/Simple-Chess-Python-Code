@@ -1,0 +1,27 @@
+import chess
+import chess.engine
+
+def print_board(board):
+    print(board)
+
+def main():
+    board = chess.Board()
+    
+    while not board.is_game_over():
+        print_board(board)
+        move = input("Enter your move: ")
+        
+        try:
+            chess_move = chess.Move.from_uci(move)
+            if chess_move in board.legal_moves:
+                board.push(chess_move)
+            else:
+                print("Illegal move, try again.")
+        except ValueError:
+            print("Invalid input format.")
+    
+    print_board(board)
+    print("Game Over! Result:", board.result())
+
+if __name__ == "__main__":
+    main()
